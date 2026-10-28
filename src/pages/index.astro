@@ -1,0 +1,35 @@
+---
+
+import '/src/falling-panels.css';
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Yevhen — Portfolio prototype</title></head><body>
+<main class="stage"><div class="camera"><div class="cube">
+{Array.from({length:6},(_,face)=><div class={`face face-${face}`}>
+{Array.from({length:9},(_,cell)=><div class="cell">
+{cell%2===0&&(<section class="screen hero" data-screen={face*9+cell} aria-label="Introduction" inert>
+<h1 class="square-title">Hello, I`m<br/>Yevhen</h1>
+<p class="square-description">I'm a frontend &amp; creative developer with 4 years of commercial experience and 50+ projects behind me. I specialize in complex websites, custom integrations, motion, and performance — from early development to launch.</p>
+<div class="square-portrait"><img src="/assets/images/hero-square-portrait.png" alt="Portrait of Yevhen" fetchpriority="high"/></div>
+<img class="square-geometry" src="/assets/images/hero-square-geometry-v2.png" alt=""/>
+<div class="square-actions"><a href="https://yevhen-chumak.vercel.app/#works" target="_blank" rel="noopener noreferrer">My works</a><a href="mailto:gekachumak@gmail.com">Contact me</a></div>
+{['top','bottom'].map(position=><div class={`hero-links hero-links-${position}`} role="navigation" aria-label={`${position==='top'?'Primary':'Footer'} navigation`}>
+<a href="https://yevhen-chumak.vercel.app/#works" target="_blank" rel="noopener noreferrer">My Works</a><button data-go="1">About me</button><a href="mailto:gekachumak@gmail.com">Contact</a><button data-go="2">Skills</button><button data-go="2">Services</button>
+</div>)}
+</section>)}
+{cell%2===1&&(<section class="screen about" data-screen={face*9+cell} aria-label="About Yevhen" inert>
+<img class="square-geometry" src="/assets/images/about-square-geometry.png" alt=""/>
+<div class="about-labels"><span>[01]</span><span>About me</span></div>
+<h2 class="about-title">From initial concept to final launch.</h2>
+<p class="about-description">I've grown from developing individual pages to leading the development of entire websites. Today, I bring together frontend engineering, design, and motion — making technical decisions, solving complex challenges, and taking responsibility for the entire development process.</p>
+<div class="hero-links hero-links-bottom" role="navigation" aria-label="About navigation">
+<a href="https://yevhen-chumak.vercel.app/#works" target="_blank" rel="noopener noreferrer">My Works</a><button data-go="1">About me</button><a href="mailto:gekachumak@gmail.com">Contact</a><button data-go="2">Skills</button><button data-go="2">Services</button>
+</div>
+</section>)}
+
+</div>)}
+</div>)}
+</div></div></main>
+<nav aria-label="Sections"><button data-overview aria-label="Cube overview">▧</button><button data-go="0">01 / Intro</button><button data-go="1">02 / About</button></nav>
+<script src="../falling-panels.ts"></script>
+</body></html>
+

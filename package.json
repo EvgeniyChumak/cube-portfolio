@@ -1,0 +1,14 @@
+{
+  "name": "cube-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --background --port 4333",
+    "stop": "astro dev stop",
+    "status": "astro dev status",
+    "logs": "astro dev logs",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {"astro": "7.2.9"}
+}
