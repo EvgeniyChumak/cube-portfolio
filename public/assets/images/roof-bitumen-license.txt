@@ -1,0 +1,5 @@
+Texture: Bitumen
+Author: Rob Tuytel / Poly Haven
+Source: https://polyhaven.com/a/bitumen
+License: CC0 https://polyhaven.com/license
+File: roof-bitumen.jpg (1K diffuse texture)
