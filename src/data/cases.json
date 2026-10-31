@@ -1,0 +1,959 @@
+[
+  {
+    "highlights": [
+      "Webflow",
+      "Memberstack",
+      "Stripe",
+      "GSAP",
+      "8 cryptos analyzed",
+      "12+ parameters",
+      "1-year archive",
+      "Period comparison",
+      "Blog",
+      "Auth & payments",
+      "Gated content",
+      "Custom logic"
+    ],
+    "id": "gotaris",
+    "liveUrl": "https://www.gotaris.de/",
+    "number": "01",
+    "title": "GOTARIS — Crypto Analysis",
+    "technologies": [
+      "Webflow",
+      "JavaScript",
+      "Memberstack",
+      "Stripe",
+      "GSAP",
+      "CMS Architecture"
+    ],
+    "description": "Built a subscription-based crypto analysis platform from scratch, including advanced CMS architecture, authentication, paid access, user dashboards and custom functionality.",
+    "main": "/assets/images/works/gotaris-main-redacted.webp",
+    "thumbnails": [
+      "/assets/images/works/gotaris-1.webp",
+      "/assets/images/works/gotaris-2-redacted.webp",
+      "/assets/images/works/gotaris-3-redacted.webp",
+      "/assets/images/works/gotaris-4-redacted.webp"
+    ],
+    "caseStudy": {
+      "subtitle": "A subscription-based crypto analysis platform.",
+      "role": "Lead Webflow Developer",
+      "overview": [
+        "I developed the entire platform from the provided design and later implemented its redesign.",
+        "The project combines membership, subscriptions, protected content, complex CMS architecture and custom JavaScript."
+      ],
+      "challenge": [
+        "The main technical challenge was building a scalable CMS architecture for cryptocurrency analysis and its historical archive.",
+        "The platform covers 8 cryptocurrencies. Each analysis contains evaluation across 12+ parameters together with an overall assessment, market dynamics and general analysis.",
+        "Weekly reports are stored in an archive containing approximately one year of historical analysis for every supported cryptocurrency."
+      ],
+      "development": [
+        "Webflow implementation from scratch",
+        "Later redesign implementation",
+        "Complex CMS architecture",
+        "Memberstack authentication",
+        "User accounts and profiles",
+        "Monthly and yearly subscriptions",
+        "Stripe payments through Memberstack",
+        "Protected dashboard",
+        "Premium content",
+        "Crypto news",
+        "Analysis archive",
+        "Custom JavaScript",
+        "Responsive development",
+        "GSAP interactions and animation"
+      ],
+      "keyFeatures": [
+        "Users can create an account and log in, manage their profile, purchase monthly or yearly subscriptions and access a protected member dashboard.",
+        "The platform includes crypto news, current analyses, historical reports, subscription information and premium content."
+      ],
+      "metrics": [
+        {
+          "value": "8",
+          "label": "Cryptocurrencies"
+        },
+        {
+          "value": "12+",
+          "label": "Evaluation parameters"
+        },
+        {
+          "value": "~1 year",
+          "label": "Weekly historical analysis"
+        },
+        {
+          "value": "Monthly / yearly",
+          "label": "Subscriptions"
+        }
+      ],
+      "images": [
+        {
+          "src": "/assets/images/works/gotaris-main-redacted.webp",
+          "alt": "GOTARIS platform preview",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/gotaris-1.webp",
+          "alt": "GOTARIS interface preview 1",
+          "width": 1276,
+          "height": 1080
+        },
+        {
+          "src": "/assets/images/works/gotaris-2-redacted.webp",
+          "alt": "GOTARIS interface preview 2",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/gotaris-3-redacted.webp",
+          "alt": "GOTARIS interface preview 3",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/gotaris-4-redacted.webp",
+          "alt": "GOTARIS interface preview 4",
+          "width": 1536,
+          "height": 1024
+        }
+      ]
+    },
+    "gallery": [
+      {
+        "src": "/assets/images/cases/gotaris-0.webp",
+        "alt": "GOTARIS — Crypto Analysis — preview 1"
+      },
+      {
+        "src": "/assets/images/cases/gotaris-1.webp",
+        "alt": "GOTARIS — Crypto Analysis — preview 2"
+      },
+      {
+        "src": "/assets/images/cases/gotaris-2.webp",
+        "alt": "GOTARIS — Crypto Analysis — preview 3"
+      },
+      {
+        "src": "/assets/images/cases/gotaris-3.webp",
+        "alt": "GOTARIS — Crypto Analysis — preview 4"
+      },
+      {
+        "src": "/assets/images/cases/gotaris-4.webp",
+        "alt": "GOTARIS — Crypto Analysis — preview 5"
+      }
+    ]
+  },
+  {
+    "highlights": [
+      "Webflow",
+      "JavaScript",
+      "GSAP",
+      "3 languages",
+      "10 CMS collections",
+      "35+ unique pages",
+      "Proximity search",
+      "SEO",
+      "Landing pages"
+    ],
+    "id": "relounge",
+    "number": "02",
+    "title": "reLounge — Medical Technology",
+    "technologies": [
+      "Webflow",
+      "JavaScript",
+      "GSAP",
+      "Finsweet",
+      "CMS",
+      "Technical SEO"
+    ],
+    "description": "Rebuilt most of the website in Webflow based on the provided designs, including core pages, CMS systems, multilingual content, advanced animations and a custom proximity-based location finder with map integration.",
+    "liveUrl": "https://www.reloungeclub.com/en",
+    "main": "/assets/images/works/relounge/relounge-hero.webp",
+    "thumbnails": [
+      "/assets/images/works/relounge/relounge-website-experience-showcase-1.webp",
+      "/assets/images/works/relounge/chatgpt-image-oct-3-2026-03-05-44-pm-2.webp",
+      "/assets/images/works/relounge/chatgpt-image-oct-3-2026-03-05-45-pm-3.webp",
+      "/assets/images/works/relounge/chatgpt-image-oct-3-2026-03-05-46-pm-4.webp"
+    ],
+    "caseStudy": {
+      "title": "reLounge",
+      "subtitle": "A multilingual website for a medical technology company focused on therapy, recovery and professional healthcare applications.",
+      "role": "Lead Webflow Developer",
+      "technologies": [
+        "Webflow",
+        "JavaScript",
+        "GSAP",
+        "Finsweet",
+        "CMS Architecture",
+        "Technical SEO",
+        "Geocoding",
+        "Map Integration"
+      ],
+      "overview": [
+        "I implemented the provided redesign in Webflow, rebuilding most of the existing website’s pages from scratch.",
+        "As the sole developer responsible for implementation, I handled the technical website structure, CMS architecture, responsive development, motion, multilingual content and technical SEO."
+      ],
+      "sections": [
+        {
+          "title": "CMS Architecture",
+          "paragraphs": [
+            "The website includes multiple CMS-driven systems for:"
+          ],
+          "items": [
+            "Blog",
+            "Locations",
+            "Partners",
+            "Glossary",
+            "additional reusable content collections"
+          ],
+          "closing": "The goal was to keep a large amount of content structured, scalable and easy to manage across different page types and languages."
+        },
+        {
+          "title": "Location Finder",
+          "paragraphs": [
+            "One of the key technical features I built was a custom proximity-based location search.",
+            "Users can enter a city or postal code, and the system resolves that location through an external geocoding service, compares it against provider locations and returns the nearest results.",
+            "The matching locations are then shown directly on the map.",
+            "The proximity logic and matching system were implemented with custom JavaScript rather than relying on a ready-made Webflow solution."
+          ]
+        },
+        {
+          "title": "Motion & Interactions",
+          "paragraphs": [
+            "I implemented a broad range of motion and interaction patterns across the website, including:"
+          ],
+          "items": [
+            "scroll-driven animations",
+            "parallax effects",
+            "staggered reveals",
+            "text animations",
+            "sliders",
+            "marquees",
+            "interactive transitions",
+            "custom UI interactions"
+          ]
+        },
+        {
+          "title": "Multilingual Development",
+          "paragraphs": [
+            "The website was implemented across multiple languages, including English and German, while maintaining the same design system, content structure and CMS logic across localized versions."
+          ]
+        },
+        {
+          "title": "Technical SEO",
+          "paragraphs": [
+            "I also handled technical SEO work across the website, including:"
+          ],
+          "items": [
+            "metadata",
+            "canonical URLs",
+            "redirects",
+            "structured data",
+            "semantic HTML",
+            "alt text",
+            "sitemap-related setup",
+            "technical cleanup"
+          ]
+        },
+        {
+          "title": "Development",
+          "paragraphs": [
+            "My responsibilities included:"
+          ],
+          "items": [
+            "rebuilding most pages from scratch",
+            "implementing the provided designs",
+            "Webflow development",
+            "CMS architecture",
+            "custom JavaScript",
+            "custom proximity search logic",
+            "geocoding integration",
+            "map-based location results",
+            "GSAP animations",
+            "responsive development",
+            "Finsweet",
+            "multilingual implementation",
+            "technical SEO",
+            "smaller third-party integrations"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "src": "/assets/images/works/relounge/relounge-hero.webp",
+          "alt": "reLounge website preview 1",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/relounge/relounge-website-experience-showcase-1.webp",
+          "alt": "reLounge website preview 2",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/relounge/chatgpt-image-oct-3-2026-03-05-44-pm-2.webp",
+          "alt": "reLounge website preview 3",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/relounge/chatgpt-image-oct-3-2026-03-05-45-pm-3.webp",
+          "alt": "reLounge website preview 4",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/relounge/chatgpt-image-oct-3-2026-03-05-46-pm-4.webp",
+          "alt": "reLounge website preview 5",
+          "width": 1536,
+          "height": 1024
+        }
+      ]
+    },
+    "gallery": [
+      {
+        "src": "/assets/images/cases/relounge-0.webp",
+        "alt": "reLounge — Medical Technology — preview 1"
+      },
+      {
+        "src": "/assets/images/cases/relounge-1.webp",
+        "alt": "reLounge — Medical Technology — preview 2"
+      },
+      {
+        "src": "/assets/images/cases/relounge-2.webp",
+        "alt": "reLounge — Medical Technology — preview 3"
+      },
+      {
+        "src": "/assets/images/cases/relounge-3.webp",
+        "alt": "reLounge — Medical Technology — preview 4"
+      },
+      {
+        "src": "/assets/images/cases/relounge-4.webp",
+        "alt": "reLounge — Medical Technology — preview 5"
+      }
+    ]
+  },
+  {
+    "highlights": [
+      "Webflow",
+      "JavaScript",
+      "GSAP",
+      "10+ CMS collections",
+      "60+ unique pages",
+      "Custom logic",
+      "Multi-step forms",
+      "SEO",
+      "Performance optimization"
+    ],
+    "id": "marketer-ux",
+    "liveUrl": "https://www.marketer-ux.com/",
+    "number": "03",
+    "title": "Marketer UX — Agency Website Redesign",
+    "technologies": [
+      "Webflow",
+      "JavaScript",
+      "GSAP",
+      "CMS",
+      "Technical SEO",
+      "Performance Optimization"
+    ],
+    "description": "Implemented a major website redesign and provided nearly three years of ongoing development and technical support, including CMS architecture, custom interactions, multi-step forms, technical SEO and performance optimization.",
+    "main": "/assets/images/works/marketer-ux/mux-hero.webp",
+    "thumbnails": [
+      "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-26-pm-1.webp",
+      "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-27-pm-2.webp",
+      "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-27-pm-3.webp",
+      "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-28-pm-4.webp"
+    ],
+    "caseStudy": {
+      "subtitle": "A digital agency website that I maintained, developed and technically owned throughout nearly three years of working with the company.",
+      "role": "Lead Webflow Developer",
+      "technologies": [
+        "Webflow",
+        "JavaScript",
+        "GSAP",
+        "CMS Architecture",
+        "Technical SEO",
+        "Performance Optimization"
+      ],
+      "overview": [
+        "I was the primary developer responsible for the website during my entire time at Marketer UX.",
+        "While the original website was not initially built by me, I implemented major parts of its redesign and continued developing, maintaining and optimizing the website over the following years.",
+        "My work covered development, CMS architecture, GSAP interactions, forms, technical SEO, performance optimization and ongoing technical support."
+      ],
+      "sections": [
+        {
+          "title": "Redesign Implementation",
+          "paragraphs": [
+            "During the redesign, I rebuilt and implemented several major parts of the website from the provided designs, including:"
+          ],
+          "items": [
+            "navigation",
+            "footer",
+            "two different case study templates",
+            "industry overview",
+            "individual industry pages",
+            "additional supporting components and sections"
+          ],
+          "closing": "I was responsible for translating the finished designs into responsive, production-ready Webflow implementations."
+        },
+        {
+          "title": "CMS Architecture",
+          "paragraphs": [
+            "I worked extensively with the website’s CMS architecture, improving existing structures and building new ones where needed.",
+            "The website included multiple interconnected content systems such as:"
+          ],
+          "items": [
+            "case studies",
+            "glossary",
+            "videos",
+            "testimonials",
+            "industry content",
+            "multi-reference relationships",
+            "reusable CMS-driven content"
+          ],
+          "closing": "A significant part of the work involved keeping these systems structured and maintainable as the website continued to grow."
+        },
+        {
+          "title": "Motion & Interactions",
+          "paragraphs": [
+            "I implemented GSAP-based motion throughout the redesign and ongoing development, including:"
+          ],
+          "items": [
+            "scroll-driven animations",
+            "text reveals",
+            "parallax",
+            "staggered animations",
+            "pinned interactions",
+            "marquees",
+            "custom transitions",
+            "interactive UI behaviour"
+          ]
+        },
+        {
+          "title": "Forms",
+          "paragraphs": [
+            "I developed custom JavaScript functionality around forms, including multi-step forms and additional form processing logic."
+          ]
+        },
+        {
+          "title": "Technical SEO",
+          "paragraphs": [
+            "I handled technical SEO work across the website, including:"
+          ],
+          "items": [
+            "structured data",
+            "canonical URLs",
+            "redirects",
+            "metadata",
+            "sitemap",
+            "semantic HTML",
+            "alt text",
+            "technical cleanup"
+          ]
+        },
+        {
+          "title": "Performance Optimization",
+          "paragraphs": [
+            "One of the largest technical improvements was website performance.",
+            "Before optimization: Mobile: 5–10. Desktop: ~50.",
+            "After optimization: Mobile: ~80. Desktop: 95–100.",
+            "The improvements included optimization of:"
+          ],
+          "items": [
+            "fonts",
+            "video loading",
+            "JavaScript and third-party scripts",
+            "images",
+            "general asset loading strategy"
+          ]
+        },
+        {
+          "title": "Long-term Ownership",
+          "paragraphs": [
+            "Beyond individual redesign tasks, I was responsible for the website’s ongoing development and support for nearly three years.",
+            "This included estimating tasks, discussing technical solutions with the team, implementing changes, debugging issues and maintaining the website as requirements evolved."
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "value": "5–10 → ~80",
+          "label": "Mobile performance: before → after"
+        },
+        {
+          "value": "~50 → 95–100",
+          "label": "Desktop performance: before → after"
+        }
+      ],
+      "images": [
+        {
+          "src": "/assets/images/works/marketer-ux/mux-hero.webp",
+          "alt": "Marketer UX website preview 1",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-26-pm-1.webp",
+          "alt": "Marketer UX website preview 2",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-27-pm-2.webp",
+          "alt": "Marketer UX website preview 3",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-27-pm-3.webp",
+          "alt": "Marketer UX website preview 4",
+          "width": 1536,
+          "height": 1024
+        },
+        {
+          "src": "/assets/images/works/marketer-ux/chatgpt-image-oct-3-2026-06-58-28-pm-4.webp",
+          "alt": "Marketer UX website preview 5",
+          "width": 1536,
+          "height": 1024
+        }
+      ]
+    },
+    "gallery": [
+      {
+        "src": "/assets/images/cases/marketer-ux-0.webp",
+        "alt": "Marketer UX — Agency Website Redesign — preview 1"
+      },
+      {
+        "src": "/assets/images/cases/marketer-ux-1.webp",
+        "alt": "Marketer UX — Agency Website Redesign — preview 2"
+      },
+      {
+        "src": "/assets/images/cases/marketer-ux-2.webp",
+        "alt": "Marketer UX — Agency Website Redesign — preview 3"
+      },
+      {
+        "src": "/assets/images/cases/marketer-ux-3.webp",
+        "alt": "Marketer UX — Agency Website Redesign — preview 4"
+      },
+      {
+        "src": "/assets/images/cases/marketer-ux-4.webp",
+        "alt": "Marketer UX — Agency Website Redesign — preview 5"
+      }
+    ]
+  },
+  {
+    "highlights": [
+      "Webflow",
+      "TypeScript",
+      "Node.js",
+      "Vercel",
+      "2 real estate sites",
+      "40+ unique pages",
+      "3+ CMS collections",
+      "Propstack API",
+      "Webhooks",
+      "Cron jobs",
+      "SEO"
+    ],
+    "id": "beste-bau",
+    "number": "04",
+    "title": "Beste Bau & ImmoBest — Real Estate Platforms",
+    "liveUrl": "https://www.bestebau.de/",
+    "technologies": [
+      "Webflow",
+      "TypeScript",
+      "Node.js",
+      "Vercel",
+      "Propstack",
+      "GSAP",
+      "Finsweet",
+      "CMS",
+      "Technical SEO"
+    ],
+    "description": "Built two real estate websites from scratch, including a custom Propstack-to-Webflow CMS synchronization system, advanced property filtering, GSAP interactions, multi-step forms, technical SEO and pre-launch optimization.",
+    "main": "/assets/images/works/beste-bau/premium-monitor-displaying-modern-housing-website.webp",
+    "thumbnails": [
+      "/assets/images/works/beste-bau/immobest-real-estate-website-display.webp",
+      "/assets/images/works/beste-bau/chatgpt-image-oct-3-2026-07-41-30-pm-1.webp",
+      "/assets/images/works/beste-bau/chatgpt-image-oct-3-2026-07-41-31-pm-2.webp",
+      "/assets/images/works/beste-bau/chatgpt-image-oct-3-2026-07-41-32-pm-3.webp"
+    ],
+    "caseStudy": {
+      "subtitle": "Two large real estate websites built from scratch in Webflow, with advanced CMS structures, property filtering, GSAP interactions, technical SEO and custom functionality.",
+      "role": "Lead Webflow Developer",
+      "overview": [
+        "I built both projects from scratch based on provided designs and was responsible for the full technical implementation.",
+        "Across the two websites, I worked with complex CMS structures, property filtering, custom animations, multi-step forms, technical SEO, performance optimization and pre-launch preparation.",
+        "For one of the projects, I also built a custom backend integration that synchronizes real estate data from Propstack into Webflow CMS."
+      ],
+      "technologies": [
+        "Webflow",
+        "JavaScript",
+        "GSAP",
+        "Finsweet",
+        "CMS Architecture",
+        "Technical SEO"
+      ],
+      "sections": [
+        {
+          "title": "Propstack Integration",
+          "paragraphs": [
+            "For one of the platforms, the main technical challenge was building a reliable one-way synchronization system from Propstack to Webflow CMS.",
+            "I developed the backend using TypeScript and Node.js and deployed it on Vercel."
+          ],
+          "lists": [
+            {
+              "intro": "The synchronization architecture included:",
+              "items": [
+                "immediate updates via webhooks",
+                "scheduled checks for changed data",
+                "weekly forced full synchronization",
+                "automatic CMS updates when changes were detected"
+              ]
+            },
+            {
+              "intro": "The integration synchronized:",
+              "items": [
+                "availability",
+                "prices",
+                "property details",
+                "images",
+                "videos",
+                "3D virtual tours",
+                "related metadata"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "CMS Architecture",
+          "paragraphs": [
+            "Across both projects, I worked with multiple CMS collections and structured content systems for property listings and other dynamic content.",
+            "I was responsible for building and maintaining the CMS architecture required for the real estate data and its relationships."
+          ]
+        },
+        {
+          "title": "Property Filtering",
+          "paragraphs": [
+            "I implemented advanced property filtering using Finsweet Filters across the real estate interfaces."
+          ]
+        },
+        {
+          "title": "Motion & Interactions",
+          "paragraphs": [
+            "I implemented GSAP interactions including:"
+          ],
+          "items": [
+            "navbar animations",
+            "scroll-based transitions",
+            "color changes",
+            "reveal animations",
+            "interface transitions"
+          ]
+        },
+        {
+          "title": "Forms",
+          "paragraphs": [
+            "I also implemented multi-step forms for lead generation and project inquiries."
+          ]
+        },
+        {
+          "title": "Technical SEO",
+          "paragraphs": [
+            "I handled technical SEO work including:"
+          ],
+          "items": [
+            "structured data",
+            "canonical URLs",
+            "redirects",
+            "metadata",
+            "sitemap setup",
+            "semantic HTML",
+            "alt text",
+            "technical cleanup"
+          ]
+        },
+        {
+          "title": "Performance & Pre-launch",
+          "paragraphs": [
+            "I worked on performance optimization and technical pre-launch preparation, including asset, script and page-load optimization."
+          ]
+        },
+        {
+          "title": "Additional backend stack used on one project",
+          "items": [
+            "TypeScript",
+            "Node.js",
+            "Vercel",
+            "Propstack"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "src": "/assets/images/works/beste-bau/premium-monitor-displaying-modern-housing-website.webp",
+          "alt": "Beste Bau website preview",
+          "width": 1672,
+          "height": 941
+        },
+        {
+          "src": "/assets/images/works/beste-bau/immobest-real-estate-website-display.webp",
+          "alt": "ImmoBest website preview",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/beste-bau/chatgpt-image-oct-3-2026-07-41-30-pm-1.webp",
+          "alt": "Beste Bau & ImmoBest website preview 3",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/beste-bau/chatgpt-image-oct-3-2026-07-41-31-pm-2.webp",
+          "alt": "Beste Bau & ImmoBest website preview 4",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/beste-bau/chatgpt-image-oct-3-2026-07-41-32-pm-3.webp",
+          "alt": "Beste Bau & ImmoBest website preview 5",
+          "width": 1448,
+          "height": 1086
+        }
+      ]
+    },
+    "gallery": [
+      {
+        "src": "/assets/images/cases/beste-bau-0.webp",
+        "alt": "Beste Bau & ImmoBest — Real Estate Platforms — preview 1"
+      },
+      {
+        "src": "/assets/images/cases/beste-bau-1.webp",
+        "alt": "Beste Bau & ImmoBest — Real Estate Platforms — preview 2"
+      },
+      {
+        "src": "/assets/images/cases/beste-bau-2.webp",
+        "alt": "Beste Bau & ImmoBest — Real Estate Platforms — preview 3"
+      },
+      {
+        "src": "/assets/images/cases/beste-bau-3.webp",
+        "alt": "Beste Bau & ImmoBest — Real Estate Platforms — preview 4"
+      },
+      {
+        "src": "/assets/images/cases/beste-bau-4.webp",
+        "alt": "Beste Bau & ImmoBest — Real Estate Platforms — preview 5"
+      }
+    ]
+  },
+  {
+    "highlights": [
+      "Webflow",
+      "GSAP",
+      "Finsweet",
+      "International industrial group",
+      "20+ unique pages",
+      "3+ CMS collections",
+      "3 product catalogs",
+      "Product filtering"
+    ],
+    "id": "victory-zx",
+    "liveUrl": "https://www.victoryzx.de/",
+    "number": "05",
+    "title": "Victory ZX — Industrial Corporate Website",
+    "technologies": [
+      "Webflow",
+      "JavaScript",
+      "GSAP",
+      "CMS",
+      "Finsweet",
+      "Technical SEO"
+    ],
+    "description": "Built the website from scratch as the sole developer, including complex CMS architecture, three product systems, product filtering, custom JavaScript, GSAP interactions, multi-step forms and technical SEO.",
+    "main": "/assets/images/works/victory-zx/zx-hero.webp",
+    "thumbnails": [
+      "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-38-59-pm-1.webp",
+      "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-39-00-pm-2.webp",
+      "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-39-01-pm-3.webp",
+      "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-39-02-pm-4.webp"
+    ],
+    "caseStudy": {
+      "subtitle": "A large corporate website for a German fire safety and industrial gas systems company with an extensive product catalog and technical content structure.",
+      "role": "Lead Webflow Developer",
+      "overview": [
+        "I built the website from scratch based on the provided design and was the sole developer responsible for the full technical implementation.",
+        "The project included a large CMS structure, multiple product catalogs, product filtering, custom JavaScript, GSAP interactions, multi-step forms, technical SEO and pre-launch preparation."
+      ],
+      "technologies": [
+        "Webflow",
+        "JavaScript",
+        "GSAP",
+        "Finsweet",
+        "CMS Architecture",
+        "Technical SEO"
+      ],
+      "sections": [
+        {
+          "title": "Product Architecture",
+          "paragraphs": [
+            "One of the main parts of the project was the CMS architecture for three different product systems:"
+          ],
+          "items": [
+            "fire extinguishers",
+            "gas cylinders",
+            "valves"
+          ],
+          "closing": "Each product type required its own structured CMS setup, templates, references and technical specifications. The website also includes supporting CMS collections for authors, categories, blog content and other reusable content."
+        },
+        {
+          "title": "Product Filtering",
+          "paragraphs": [
+            "I implemented custom product filtering logic together with Finsweet to make large product catalogs easier to browse.",
+            "The filtering system works across technical product properties and structured CMS data."
+          ]
+        },
+        {
+          "title": "CMS Architecture",
+          "paragraphs": [
+            "The project includes multiple interconnected CMS collections with reference and multi-reference relationships.",
+            "The architecture had to support:"
+          ],
+          "items": [
+            "products",
+            "product categories",
+            "technical specifications",
+            "authors",
+            "blog content",
+            "downloadable resources",
+            "reusable content structures"
+          ]
+        },
+        {
+          "title": "Motion & Interactions",
+          "paragraphs": [
+            "I implemented GSAP and JavaScript interactions across the site, including:"
+          ],
+          "items": [
+            "sliders",
+            "marquees",
+            "hover interactions",
+            "reveal animations",
+            "navigation interactions",
+            "additional custom interface behaviour"
+          ]
+        },
+        {
+          "title": "Forms",
+          "paragraphs": [
+            "I implemented multi-step forms for product inquiries and lead generation."
+          ]
+        },
+        {
+          "title": "Technical SEO",
+          "paragraphs": [
+            "I handled technical SEO across the project, including:"
+          ],
+          "items": [
+            "structured data",
+            "canonical URLs",
+            "redirects",
+            "metadata",
+            "sitemap",
+            "semantic HTML",
+            "alt text",
+            "technical cleanup"
+          ]
+        },
+        {
+          "title": "Client Collaboration",
+          "paragraphs": [
+            "I participated in client calls throughout the project and consulted on technical setup, implementation approaches and the best solutions for different requirements."
+          ]
+        },
+        {
+          "title": "Pre-launch & QA",
+          "paragraphs": [
+            "I handled technical QA and pre-launch preparation across the website, including responsive testing, CMS validation and final production checks."
+          ]
+        },
+        {
+          "title": "Development",
+          "paragraphs": [
+            "My responsibilities included:"
+          ],
+          "items": [
+            "Webflow development from scratch",
+            "CMS architecture",
+            "three product CMS systems",
+            "reference and multi-reference structures",
+            "product templates",
+            "product filtering",
+            "custom JavaScript",
+            "Finsweet",
+            "GSAP animations",
+            "sliders and marquees",
+            "hover interactions",
+            "multi-step forms",
+            "responsive development",
+            "technical SEO",
+            "QA",
+            "pre-launch preparation",
+            "client communication and technical consulting"
+          ]
+        }
+      ],
+      "images": [
+        {
+          "src": "/assets/images/works/victory-zx/zx-hero.webp",
+          "alt": "Victory ZX website preview 1",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-38-59-pm-1.webp",
+          "alt": "Victory ZX website preview 2",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-39-00-pm-2.webp",
+          "alt": "Victory ZX website preview 3",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-39-01-pm-3.webp",
+          "alt": "Victory ZX website preview 4",
+          "width": 1448,
+          "height": 1086
+        },
+        {
+          "src": "/assets/images/works/victory-zx/chatgpt-image-oct-3-2026-08-39-02-pm-4.webp",
+          "alt": "Victory ZX website preview 5",
+          "width": 1448,
+          "height": 1086
+        }
+      ]
+    },
+    "gallery": [
+      {
+        "src": "/assets/images/cases/victory-zx-0.webp",
+        "alt": "Victory ZX — Industrial Corporate Website — preview 1"
+      },
+      {
+        "src": "/assets/images/cases/victory-zx-1.webp",
+        "alt": "Victory ZX — Industrial Corporate Website — preview 2"
+      },
+      {
+        "src": "/assets/images/cases/victory-zx-2.webp",
+        "alt": "Victory ZX — Industrial Corporate Website — preview 3"
+      },
+      {
+        "src": "/assets/images/cases/victory-zx-3.webp",
+        "alt": "Victory ZX — Industrial Corporate Website — preview 4"
+      },
+      {
+        "src": "/assets/images/cases/victory-zx-4.webp",
+        "alt": "Victory ZX — Industrial Corporate Website — preview 5"
+      }
+    ]
+  }
+]

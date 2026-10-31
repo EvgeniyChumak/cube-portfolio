@@ -1,57 +1,16 @@
 ---
 import '/src/falling-panels.css';
+import '../industrial-scene.css';
+import IndustrialScene from '../components/IndustrialScene.astro';
+import projects from '../data/cases.json';
+import CasePanel from '../components/CasePanel.astro';
 const modules = [
  {x:0,y:0,n:1,title:'A different perspective.',label:'INTRODUCTION',text:'Начало маршрута. Скролл перемещает камеру вправо вдоль трубы.'},
  {x:1120,y:0,n:1,title:'About me.',label:'ABOUT',text:''},
  {x:2240,y:0,n:4,title:'My path so far.',label:'CASE STUDY / 03',text:'Камера остановилась. Следующие три секции — стороны одной треугольной призмы.'},
- {x:3360,y:0,n:1,title:'Keep exploring.',label:'HORIZONTAL PASSAGE',text:'История закончилась. Камера движется вправо вдоль трубы.'},
- {x:3360,y:640,n:1,title:'The story continues.',label:'VERTICAL PASSAGE',text:'Продолжай скроллить вниз к следующему разделу.'},
- {x:3360,y:1280,n:4,title:'Four dimensions of a case.',label:'CASE STUDY / 04',text:'Четыре стороны. Камера остаётся на месте, вращается только блок кейса.'},
- {x:3360,y:1920,n:1,title:'Follow the line.',label:'VERTICAL PASSAGE',text:'Движение продолжается вниз. Обычная секция находится на передней стороне трубы.'},
- {x:3360,y:2560,n:5,title:'Five ways to see it.',label:'CASE STUDY / 05',text:'Пять вложенных секций. Снаружи — продолжение трубы, внутри — пятигранная призма.'},
- {x:3360,y:3200,n:1,title:'Room for what’s next.',label:'END OF PROTOTYPE',text:'Конец тестового маршрута. Можно вернуться назад или посмотреть всю конструкцию.'},
+ {x:3360,y:0,n:1,title:'My works.',label:'SELECTED WORK',text:'История закончилась. Камера движется вправо вдоль трубы.'},
+ ...projects.map((project,index)=>({x:3360,y:(index+1)*640,n:4,title:project.title,label:'CASE STUDY',text:project.description})), 
 ];
-const scenery = [
- {type:'building',x:-1100,y:-120,z:-1050,w:720,h:760,d:480},
- {type:'building distant-balconies',x:850,y:-300,z:-1550,w:1050,h:940,d:500},
- {type:'building',x:2440,y:-30,z:-1300,w:620,h:670,d:480},
- {type:'car-body',x:180,y:575,z:310,w:210,h:50,d:96},
- {type:'car-glass',x:235,y:540,z:310,w:105,h:35,d:84},
- {type:'planter',x:-510,y:600,z:20,w:140,h:40,d:90},
- {type:'green',x:-500,y:560,z:20,w:120,h:40,d:70},
- {type:'planter',x:1490,y:600,z:35,w:150,h:40,d:90},
- {type:'green',x:1500,y:560,z:35,w:130,h:40,d:70},
-];
-scenery.push(
- {type:'building tower',x:-1550,y:-480,z:-2100,w:610,h:1120,d:500},
- {type:'car-body second-car',x:1050,y:575,z:650,w:210,h:50,d:96},
- {type:'car-glass',x:1105,y:540,z:650,w:105,h:35,d:84},
- {type:'entrance',x:1180,y:530,z:-1260,w:100,h:110,d:80},
- {type:'canopy',x:1160,y:520,z:-1220,w:140,h:12,d:135},
-);
-// Sparse low-poly planting clusters and seating away from the hero frontage.
-scenery.push(
- ...[[-1050,-530],[-1050,-240],[-480,-780],[100,-780],[550,-780],[1650,-780],[2100,-780],[2850,-780]].flatMap(([x,z],i)=>[
-  {type:'shrub',x,y:590-(i%3)*8,z,w:100+(i%3)*25,h:50+(i%3)*8,d:95},
-  {type:'shrub shrub-light',x:x+60,y:604,z:z+35,w:85,h:36,d:75},
- ]),
- ...[[-650,-240],[1000,-780],[2400,-780]].flatMap(([x,z])=>[
-  {type:'bench-seat',x,y:586,z,w:175,h:12,d:48},
-  {type:'bench-seat',x,y:548,z:z-22,w:175,h:44,d:10},
-  {type:'bench-leg',x:x+20,y:598,z,w:10,h:42,d:38},
-  {type:'bench-leg',x:x+145,y:598,z,w:10,h:42,d:38},
- ]),
- // Deep, continuous cantilevered balconies: the architectural cue in the reference.
-);
-scenery.push(
- {type:'entrance',x:-790,y:530,z:-790,w:100,h:110,d:40},
- {type:'entrance',x:2700,y:530,z:-1040,w:100,h:110,d:40},
-);
-// The courtyard camera stays above and in front of these fixed props.
-function sceneryFaces(type:string){
- const undersideVisible=type==='balcony-slab'||type==='canopy'||type==='bench-seat';
- return undersideVisible?['front','left','right','top','bottom']:['front','left','right','top'];
-}
 const career = [
  [
  ['2021','University','Enrolled in Computer Engineering at Odesa Polytechnic National University and began studying frontend development.'],
@@ -68,53 +27,22 @@ const names=['Overview','Challenge','Approach','Execution','Outcome'];
 <html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Portfolio — Pipe study</title></head>
 <body>
 <div class="preloader" role="status" aria-label="Loading portfolio">
- <div class="loading-card">
-  <div class="loading-portrait"><img src="/assets/images/contact-portrait.webp" alt="" width="418" height="501" decoding="async" fetchpriority="high"/></div>
-  <p class="loading-name">Yevhen Chumak</p>
-  <p class="loading-role">Frontend &amp; Webflow Developer</p>
-  <div class="loading-status"><span aria-hidden="true"></span>Preparing your experience</div>
-  <div class="loading-track" aria-hidden="true"><span class="preloader-line"></span></div>
- </div>
+ <div class="loading-art" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+ <div class="loading-caption"><span>YEVHEN CHUMAK</span><span class="loading-label">LOADING</span></div>
 </div>
 <noscript><style>.preloader{display:none}</style></noscript>
 <main class="stage" aria-label="Прототип трубы"><div class="camera"><div class="world">
-<div class="neighborhood" aria-hidden="true">
- <div class="courtyard">
- {[
- {x:-800,z:-710,w:3700,d:120},
- {x:-800,z:-810,w:120,d:100},
- {x:-260,z:-590,w:120,d:550},
- {x:1170,z:-1220,w:120,d:510},
- {x:2690,z:-1020,w:120,d:310},
- {x:-800,z:-200,w:540,d:120},
- ].map(path=><div class="yard-path planned-path" style={`left:${path.x+1600}px;top:${path.z+1750}px;width:${path.w}px;height:${path.d}px`}></div>)}
- <div class="sidewalk"></div><div class="street"><div class="lane-marks"></div><div class="crosswalk"></div></div><span class="street-label">ЖИЛОЙ КВАРТАЛ / 01</span></div>
- {scenery.filter(o=>!(o.type.startsWith('car-')&&o.z===310)).map(o=><div class={`city-box ${o.type}`} style={`left:${o.x}px;top:${o.y}px;transform:translateZ(${o.z}px);--bw:${o.w}px;--bh:${o.h}px;--bd:${o.d}px;--cols:${Math.max(1,Math.floor((o.w-36)/96))};--side-cols:${Math.max(1,Math.floor((o.d-36)/96))};--rows:${Math.max(1,Math.floor((o.h-104)/80))}`}>
- {sceneryFaces(o.type).map(side=><div class={`box-face box-${side}`}></div>)}
- </div>)}
- {[{x:1050,z:650}].flatMap(car=>[35,165].flatMap(dx=>[-1,1].map(side=><div class="car-wheel" style={`left:${car.x+dx}px;top:612px;transform:translateZ(${car.z+side*51}px)`}></div>)))}
-{[0,1,2,3,4,5].map(carIndex=><div class={`moving-car traffic-${carIndex}`} style={`--drive-delay:${-24-carIndex*13}s`}>
- <span class="car-bounds"></span>
- <div class="car-suspension">
- {scenery.filter(o=>o.type.startsWith('car-')&&o.z===310).map(o=><div class={`city-box ${o.type}`} style={`left:${o.x}px;top:${o.y}px;transform:translateZ(${o.z}px);--bw:${o.w}px;--bh:${o.h}px;--bd:${o.d}px`}>
- {sceneryFaces(o.type).map(side=><div class={`box-face box-${side}`}></div>)}
- </div>)}
- </div>
- {[215,345].flatMap(x=>[-1,1].map(side=><div class="car-wheel" style={`left:${x}px;top:612px;transform:translateZ(${310+side*51}px)`}><span class="wheel-hub"></span></div>))}
- <div class="exhaust-pipe"></div>
- {[0,1].map(puff=><span class="exhaust-puff" style={`--puff-delay:${puff*-1.1}s;--drift:${-18-puff*6}px;--spread:${1.4+puff*.22}`}></span>)}
-</div>)}
-</div>
+<IndustrialScene/>
 {modules.map((m,i)=><div class:list={['module',{'case-module':m.n>1}]} data-module={i} data-count={m.n} data-x={m.x} data-y={m.y} style={`left:${m.x}px;top:${m.y}px;--radius:${m.n>1?560/Math.tan(Math.PI/m.n):160}px`}>
  {m.n===1&&<div class="shell"><div class="wall wall-top"></div><div class="wall wall-bottom"></div><div class="wall wall-left"></div><div class="wall wall-right"></div><div class="wall wall-back"></div><div class="city-box rooftop-unit" style="left:660px;top:-48px;transform:translateZ(-180px);--bw:100px;--bh:48px;--bd:70px">{['front','back','left','right','top'].map(side=><div class={`box-face box-${side}`}></div>)}</div><div class="roof-aerial"></div><div class="roof-parapet"></div></div>}
  <div class="rotor">
- {Array.from({length:m.n},(_,face)=><section class:list={['panel',{'case-panel':m.n>1,'hero':i===0,'about':i===1,'timeline-panel':i===2}]} data-face={face} style={m.n>1?`transform:rotate${i===2?'X':'Y'}(${face*360/m.n}deg) translateZ(${(i===2?320:560)/Math.tan(Math.PI/m.n)}px);--tone:${face%2?'#171a1c':'#eeeee9'};--ink:${face%2?'#eeeee9':'#171a1c'}`:''} inert>
+ {Array.from({length:m.n},(_,face)=><section class:list={['panel',{'case-panel':m.n>1,'hero':i===0,'about':i===1,'timeline-panel':i===2,'works-panel':i===3,'project-panel':i>=4}]} data-face={face} style={m.n>1?`transform:rotate${i===2?'X':'Y'}(${face*360/m.n}deg) translateZ(${(i===2?320:560)/Math.tan(Math.PI/m.n)}px);--tone:${face%2?'#171a1c':'#eeeee9'};--ink:${face%2?'#eeeee9':'#171a1c'}`:''} inert>
 {i===0&&<div class="design-content">
-<div class="hero-menu" role="navigation" aria-label="Main navigation"><a href="https://yevhen-chumak.vercel.app/#works" target="_blank" rel="noopener noreferrer">My Works</a><button data-go="1">About me</button><a href="mailto:gekachumak@gmail.com">Contact</a><a href="https://yevhen-chumak.vercel.app/#skills" target="_blank" rel="noopener noreferrer">Skills</a><a href="https://yevhen-chumak.vercel.app/#services" target="_blank" rel="noopener noreferrer">Services</a></div>
+<div class="hero-menu" role="navigation" aria-label="Main navigation"><button data-go="4">My Works</button><button data-go="1">About me</button><a href="mailto:gekachumak@gmail.com">Contact</a><a href="https://yevhen-chumak.vercel.app/#skills" target="_blank" rel="noopener noreferrer">Skills</a><a href="https://yevhen-chumak.vercel.app/#services" target="_blank" rel="noopener noreferrer">Services</a></div>
 <h1 class="square-title">Hello, I`m Yevhen</h1>
 <p class="square-description">I’m a developer with 4 years of commercial experience and more than 50 completed projects, building large, complex websites across frontend development and Webflow, with API integrations, GSAP animations and performance optimization.</p>
-<img class="hero-architecture" src="/assets/images/hero-brutalist-cutout.png" alt="" width="535" height="446" decoding="async"/>
-<div class="square-actions"><a href="https://yevhen-chumak.vercel.app/#works" target="_blank" rel="noopener noreferrer">My works</a><a href="mailto:gekachumak@gmail.com">Contact me</a></div>
+<img class="hero-architecture" src="/assets/images/hero-brutalist-extended.webp" alt="" width="535" height="600" decoding="async"/>
+<div class="square-actions"><button data-go="4">My works</button><a href="mailto:gekachumak@gmail.com">Contact me</a></div>
 </div>}
 {i===1&&<div class="design-content">
 <img class="about-tower" src="/assets/images/about-brutalist-tower.png" alt="" width="677" height="1355" decoding="async"/>
@@ -133,14 +61,22 @@ const names=['Overview','Challenge','Approach','Execution','Outcome'];
 })}
 
 </div>}
-{i>2&&<>
- <header><span>YEVHEN / SPATIAL STUDY</span><span>{String(i+1).padStart(2,'0')} — {m.label}</span></header>
- <div class="section-body"><p class="eyebrow">{m.n>1?`CASE ${m.n} / ${names[face]}`:'PLACEHOLDER SECTION'}</p><h1>{face===0?m.title:names[face]+'.'}</h1><p class="description">{face===0?m.text:'Здесь будет содержимое кейса: описание задачи, процесс, визуальные материалы и результат.'}</p>
- {m.n>1&&<div class="case-placeholder"><span>{String(face+1).padStart(2,'0')}</span><div><b>{names[face]}</b><p>PLACEHOLDER / PROJECT CONTENT</p></div><div class="mini-shape" style={`--sides:${m.n}`}>{m.n}</div></div>}
- {m.n===1&&<div class="direction">{i<3?'→':'↓'}</div>}
- </div>
- <footer><span>{m.n>1?'CAMERA LOCKED · OBJECT ROTATES':'CAMERA MOVES · OBJECT STAYS'}</span><span>{m.n>1?`${face+1} / ${m.n}`:'SCROLL TO CONTINUE'}</span></footer>
- </>}
+{i===3&&<div class="design-content works-content">
+<h2 class="works-accessible-title">My works</h2>
+<div class="works-white" aria-hidden="true"></div>
+{[
+ {y:75,x:40,next:953,portraitX:953,portraitY:37,offset:0},
+ {y:295,x:40,next:937,portraitX:40,portraitY:252,offset:-5},
+ {y:493,x:54,next:967,portraitX:967,portraitY:455,offset:0},
+ {y:713,x:54,next:951,portraitX:54,portraitY:670,offset:-5},
+].map((row,index)=><>
+<div class="works-text-row" aria-hidden="true" style={`top:${row.y}px;--row-direction:${index%2===0?1:-1}`}>
+<span style={`left:${row.x}px`}>MY WORKS</span><span style={`left:${row.next}px;top:${row.offset}px`}>MY WORKS</span>
+</div>
+<div class:list={["works-portrait",{"works-portrait-light":index>1}]} style={`left:${row.portraitX}px;top:${row.portraitY}px;--row-direction:${index%2===0?1:-1}`}><div class="about-portrait-crop"><img src="/assets/images/about-portrait.png" alt="" width="836" height="1002" decoding="async"/></div></div>
+</>)}
+</div>}
+{i>=4&&<CasePanel project={projects[i-4]} face={face}/>}
  </section>)}
  {m.n>1&&[0,i===2?1120:640].map(edge=>{const half=i===2?320:560;const r=half/Math.sin(Math.PI/m.n);const points=Array.from({length:m.n},(_,j)=>{const a=Math.PI/m.n+j*2*Math.PI/m.n;return i===2?`${50-50*Math.cos(a)}% ${50+50*Math.sin(a)}%`:`${50+50*Math.sin(a)}% ${50+50*Math.cos(a)}%`}).join(',');return <div class="prism-cap" style={`width:${2*r}px;height:${2*r}px;left:${i===2?edge-r:560-r}px;top:${i===2?320-r:edge-r}px;transform:${i===2?'rotateY(90deg)':'rotateX(90deg)'};clip-path:polygon(${points})`}></div>})}
  </div>
@@ -159,7 +95,7 @@ const names=['Overview','Challenge','Approach','Execution','Outcome'];
  const loader=document.querySelector('.preloader');
  const stage=document.querySelector('.stage');
  stage.setAttribute('aria-busy','true');
- const images=[...document.querySelectorAll('.loading-portrait img,.hero-architecture,.about-tower,.about-portrait img,.career-duct')];
+ const images=[...document.querySelectorAll('.hero-architecture,.about-tower,.about-portrait img,.career-duct')];
  let fallback;
  Promise.race([
   Promise.allSettled([document.fonts.ready,...images.map(img=>img.decode())]),

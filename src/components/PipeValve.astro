@@ -1,0 +1,15 @@
+---
+// A fixed low-poly handwheel: every bar has real depth and closed sides.
+const bars=[
+ ...Array.from({length:8},(_,i)=>{const a=i*Math.PI/4;return {x:Math.cos(a)*54,y:Math.sin(a)*54,z:55,w:46,h:12,d:14,a:i*45+90}}),
+ ...Array.from({length:2},(_,i)=>({x:0,y:0,z:55,w:98,h:10,d:10,a:i*90})),
+ {x:0,y:0,z:22,w:18,h:18,d:66,a:0},
+ {x:0,y:0,z:0,w:45,h:45,d:12,a:45},
+ {x:0,y:0,z:64,w:24,h:24,d:12,a:30},
+];
+---
+<div class="valve-3d" aria-hidden="true">
+ {bars.map(b=><div class="valve-bar" style={`transform:translate3d(${b.x}px,${b.y}px,${b.z}px) rotateZ(${b.a}deg);--vw:${b.w}px;--vh:${b.h}px;--vd:${b.d}px`}>
+ {['front','back','left','right','top','bottom'].map(side=><span class={`valve-face valve-${side}`}/>)}
+ </div>)}
+</div>

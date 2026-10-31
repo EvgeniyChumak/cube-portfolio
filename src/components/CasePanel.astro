@@ -1,0 +1,33 @@
+---
+const {project:p,face}=Astro.props;
+const c=p.caseStudy;
+const phone:Record<string,number>={gotaris:1,relounge:4,'marketer-ux':3,'victory-zx':4};
+const first=phone[p.id]??0;
+const gallery=[p.gallery[first],...p.gallery.filter((_:unknown,i:number)=>i!==first)];
+const topics=c.sections?.slice(0,4)??[
+ {title:'Platform development',items:c.development},
+ {title:'Member experience',paragraphs:c.keyFeatures},
+ {title:'The technical challenge',paragraphs:c.challenge},
+ {title:'At a glance',items:p.highlights},
+];
+const pair=topics.slice((face-2)*2,(face-2)*2+2);
+---
+<div class:list={['design-content','project-content',{'project-cover':face===0,'project-detail':face>0}]}>
+ <div class="project-topline"><span>SELECTED WORK / {p.number}</span><span>{['PROJECT','OVERVIEW','IMPLEMENTATION','IN DETAIL'][face]} — 0{face+1} / 04</span></div>
+ {face===0?<>
+  <div class="project-heading"><h2>{p.id==='gotaris'?'GOTARIS — Crypto Analysis Platform':p.title}</h2></div>
+  <div class="project-gallery" data-gallery aria-label={`${p.title} screenshots`} aria-roledescription="carousel">
+   <div class="project-slides">{gallery.map((img,index)=><img src={index===0?img.src:undefined} data-src={img.src} alt={img.alt} width="1280" height="853" loading="lazy" decoding="async" hidden={index!==0}/>)}</div>
+   <span class="gallery-announcement" data-gallery-counter aria-live="polite">01 / 05</span>
+   <div class="project-thumbnails">{gallery.map((img,index)=><button data-gallery-index={index} aria-label={`View image ${index+1}`} aria-pressed={index===0}><img src={img.src} alt="" width="256" height="171" loading="lazy" decoding="async"/></button>)}</div>
+  </div>
+  <div class="project-bottom"><div class="project-tags">{p.technologies.map(tag=><span>{tag}</span>)}</div><div class="project-cover-actions"><a href={p.liveUrl} target="_blank" rel="noopener noreferrer">Visit website ↗</a><button data-case-turn>Explore project →</button></div></div>
+ </>:face===1?<>
+  <h2>{c.title??p.title}</h2>
+  <div class="project-overview"><div><span class="project-kicker">MY ROLE</span><h3>{c.role}</h3><p>{c.subtitle}</p><div class="project-tags">{p.technologies.map(tag=><span>{tag}</span>)}</div></div><div><span class="project-kicker">THE PROJECT</span>{c.overview?.map(text=><p>{text}</p>)}{c.metrics&&<div class="project-metrics">{c.metrics.map(metric=><div><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>}</div></div>
+ </>:<>
+  <h2>{face===2?'Behind the build.':'Details that matter.'}</h2>
+  <div class="project-topics">{pair.map((topic,index)=><article><span class="project-kicker">0{(face-2)*2+index+1} / {p.title.split(' — ')[0]}</span><h3>{topic.title}</h3>{topic.paragraphs?.slice(0,2).map(text=><p>{text}</p>)}{topic.items&&<ul>{topic.items.slice(0,7).map(text=><li>{text}</li>)}</ul>} {topic.lists?.slice(0,1).map(list=><><p>{list.intro}</p><ul>{list.items.slice(0,5).map(text=><li>{text}</li>)}</ul></>)}</article>)}</div>
+ </>}
+ {face>0&&<div class="project-detail-footer"><span>{p.title}</span><span>{face===3?'SCROLL TO NEXT PROJECT ↓':'SCROLL TO CONTINUE ↓'}</span></div>}
+</div>

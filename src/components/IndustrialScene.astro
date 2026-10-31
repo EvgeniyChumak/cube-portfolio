@@ -1,0 +1,35 @@
+---
+import PipeValve from './PipeValve.astro';
+import ProjectConveyor from './ProjectConveyor.astro';
+const pipes = [
+ // Middle plane: a continuous header with a riser entering from above.
+ // Ends extend beyond the entrance frustum, not along the portfolio route.
+ {x:-1000,y:-80,z:-650,w:2950,h:140,d:190},
+ {x:870,y:-500,z:-650,w:140,h:420,d:190},
+ // Far plane: a separate connected header, with two through-risers.
+ {x:-1100,y:-130,z:-1450,w:1860,h:105,d:150},
+ {x:655,y:-130,z:-1450,w:105,h:210,d:150},
+ {x:655,y:-25,z:-1450,w:1395,h:105,d:150},
+ {x:-240,y:-440,z:-1450,w:105,h:415,d:150},
+ {x:1420,y:-330,z:-1450,w:105,h:410,d:150},
+];
+// Bevelled elbows are closed extruded polygons, including their inner walls.
+const elbow=[[0,0],[260,0],[260,350],[350,440],[760,440],[760,700],[300,700],[0,400]];
+// A single near elbow frames the left edge of the first screen.
+const bends=[
+ {x:-620,y:-220,z:-220},
+];
+---
+<div class="neighborhood industrial-scene" aria-hidden="true">
+ <ProjectConveyor/>
+ {pipes.map((p,i)=><div class:list={['industrial-duct',{'duct-distant':p.z < -1000}]} style={`left:${p.x}px;top:${p.y}px;transform:translateZ(${p.z}px);--w:${p.w}px;--h:${p.h}px;--d:${p.d}px`}>
+  {['front','back','left','right','top','bottom'].map(side=><div class={`duct-face duct-${side}`}>{side==='front'&&<span class={p.w>p.h?'pipe-seams-horizontal':'pipe-seams-vertical'}></span>}</div>)}
+ </div>)}
+ <div class="exhaust-grate" aria-hidden="true"></div>
+ <div class="pipe-steam grate-steam" style="left:-145px;top:217px;transform:translateZ(-200px)" aria-hidden="true">{[0,1,2,3,4,5].map(i=><i style={`--delay:${-i*.7}s;--plume-x:${(i%3-1)*36}px;--plume-z:${(i%2?1:-1)*25}px;--drift:${i%2?45:-24}px`}/>)}</div>
+ {bends.map(b=><div class="duct-elbow" style={`left:${b.x}px;top:${b.y}px;transform:translateZ(${b.z}px)`}>
+  <PipeValve/>
+  {[130,-130].map(z=><div class="duct-face elbow-cheek" style={`transform:translateZ(${z}px);clip-path:polygon(${elbow.map(([x,y])=>`${x}px ${y}px`).join(',')})`}/>)}
+  {elbow.map(([x,y],i)=>{const [nx,ny]=elbow[(i+1)%elbow.length];return <div class="duct-face elbow-edge" style={`left:${x}px;top:${y}px;width:${Math.hypot(nx-x,ny-y)}px;transform:rotateZ(${Math.atan2(ny-y,nx-x)}rad) rotateX(90deg)`}/>})}
+ </div>)}
+</div>

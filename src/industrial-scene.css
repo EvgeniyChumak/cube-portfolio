@@ -1,0 +1,126 @@
+/* Industrial envelope. Shared bitmap, static planes, no filter/compositing passes. */
+body{background:#161e22}
+.industrial-duct{position:absolute;width:var(--w);height:var(--h);transform-style:preserve-3d}
+.duct-face{position:absolute;backface-visibility:hidden;background:linear-gradient(#ffffff08,#0002),repeating-linear-gradient(90deg,transparent 0 319px,#34363255 320px,transparent 322px),url('/assets/images/concrete-cold.webp') center/auto,auto,420px 420px;opacity:var(--scene-alpha,1);border:1px solid #55574f}
+.duct-front,.duct-back{width:var(--w);height:var(--h)}
+.duct-front{transform:translateZ(calc(var(--d)/2))}
+.duct-back{transform:translateZ(calc(var(--d)/-2)) rotateY(180deg)}
+.duct-left,.duct-right{width:var(--d);height:var(--h);left:calc((var(--w) - var(--d))/2);background-color:#555650;background-blend-mode:multiply}
+.duct-left{transform:translateX(calc(var(--w)/-2)) rotateY(-90deg)}
+.duct-right{transform:translateX(calc(var(--w)/2)) rotateY(90deg)}
+.duct-top,.duct-bottom{width:var(--w);height:var(--d);top:calc((var(--h) - var(--d))/2)}
+.duct-top{transform:translateY(calc(var(--h)/-2)) rotateX(90deg)}
+.duct-bottom{transform:translateY(calc(var(--h)/2)) rotateX(-90deg);background-color:#50514b;background-blend-mode:multiply}
+.duct-grille{position:absolute;right:40px;top:30px;width:120px;height:110px;border:10px solid #72736d;background:repeating-linear-gradient(#141615 0 8px,#464842 9px 12px);box-shadow:inset 6px 6px 10px #000,0 2px 0 #bbb}
+.duct-window{position:absolute;left:38px;top:100px;width:40px;height:120px;background:linear-gradient(90deg,#090b0a 60%,#393c35 61%);border:7px solid #65675f;box-shadow:inset 4px 4px 8px #000}
+.duct-collar{position:absolute;left:65%;top:-4px;bottom:-4px;width:16px;background:linear-gradient(90deg,#393c37,#96998e 40%,#50544b);border:2px solid #3c4039}
+.wall,.rotor .prism-cap{background:#8e9087 url('/assets/images/concrete-cold.webp') repeat;background-size:420px 420px;box-shadow:inset 0 0 0 2px #55584e}
+.wall::after,.rotor .prism-cap::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 275px,#464a4166 277px,transparent 280px);border:0;box-shadow:none}
+.wall-top{background-color:#b0b1a7;background-blend-mode:screen}
+.wall-bottom,.wall-back{background-color:#575b53;background-blend-mode:multiply}
+.roof-aerial,.roof-parapet,.rooftop-unit{display:none}
+/* Explicit layers: the former background shorthand was invalid in browsers. */
+.duct-face{background-image:linear-gradient(#ffffff08,#0002),repeating-linear-gradient(90deg,transparent 0 319px,#34363255 320px,transparent 322px),url('/assets/images/concrete-cold.webp');background-size:auto,auto,420px 420px;background-position:center;background-repeat:repeat}
+.duct-end-grille{position:absolute;inset:22px;border:12px solid #75776f;background:repeating-linear-gradient(#111310 0 12px,#55584e 13px 18px);box-shadow:inset 12px 10px 20px #000}
+.duct-elbow{position:absolute;width:760px;height:700px;transform-style:preserve-3d}
+.elbow-cheek{inset:0;backface-visibility:visible}
+.elbow-edge{height:260px;margin-top:-130px;transform-origin:0 50%;backface-visibility:visible;background-color:#66685f;background-blend-mode:multiply}
+.duct-distant .duct-face{background-color:#515d60;background-blend-mode:multiply}
+.pipe-seams-horizontal,.pipe-seams-vertical{position:absolute;inset:0;pointer-events:none}
+.pipe-seams-horizontal{background:repeating-linear-gradient(90deg,transparent 0 395px,#343b38 396px 399px,#939b8e 400px 404px,transparent 405px 800px)}
+.pipe-seams-vertical{background:repeating-linear-gradient(0deg,transparent 0 245px,#343b38 246px 249px,#939b8e 250px 254px,transparent 255px 500px)}
+.duct-face::before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(93deg,transparent 0 83px,#222a2517 85px,transparent 90px 193px),linear-gradient(180deg,#121a191f,transparent 26%,transparent 80%,#151d1926);border-top:1px solid #d2d3c333}
+.pipe-valve{position:absolute;overflow:visible}
+.valve-3d{position:absolute;left:470px;top:570px;transform:translateZ(138px);transform-style:preserve-3d}
+.valve-bar{position:absolute;transform-style:preserve-3d}
+.valve-face{position:absolute;backface-visibility:hidden;background:#687365;border:1px solid #444e43}
+.valve-front,.valve-back{width:var(--vw);height:var(--vh);left:calc(var(--vw)/-2);top:calc(var(--vh)/-2)}
+.valve-front{transform:translateZ(calc(var(--vd)/2));background:linear-gradient(120deg,#8c9580,#596353)}
+.valve-back{transform:translateZ(calc(var(--vd)/-2)) rotateY(180deg);background:#323d33}
+.valve-left,.valve-right{width:var(--vd);height:var(--vh);left:calc(var(--vd)/-2);top:calc(var(--vh)/-2);background:#414b3e}
+.valve-left{transform:translateX(calc(var(--vw)/-2)) rotateY(-90deg)}
+.valve-right{transform:translateX(calc(var(--vw)/2)) rotateY(90deg)}
+.valve-top,.valve-bottom{width:var(--vw);height:var(--vd);left:calc(var(--vw)/-2);top:calc(var(--vd)/-2)}
+.valve-top{transform:translateY(calc(var(--vh)/-2)) rotateX(90deg);background:#929b87}
+.valve-bottom{transform:translateY(calc(var(--vh)/2)) rotateX(-90deg);background:#343f32}
+.pipe-steam{position:absolute;width:52px;height:24px;pointer-events:none;opacity:var(--scene-alpha,1)}
+.steam-nozzle{position:absolute;left:15px;top:0;width:24px;height:24px;border:4px solid #484f48;border-top:7px solid #8b9184;background:#232a26}
+.pipe-steam i{position:absolute;left:-8px;bottom:14px;width:68px;height:92px;border-radius:50%;background:radial-gradient(ellipse,#dce3dc55, #c6d2c522 35%,transparent 68%);opacity:0;animation:pipe-vapor 4.2s linear infinite;animation-delay:var(--delay);animation-play-state:var(--steam-play,paused)}
+@keyframes pipe-vapor{0%{transform:translate(0,0) scale(.3);opacity:0}18%{opacity:.4}65%{opacity:.2}100%{transform:translate(45px,-165px) scale(1.7);opacity:0}}
+@media(prefers-reduced-motion:reduce){.pipe-steam i{display:none}}
+.valve-bar .valve-face{background-image:linear-gradient(#343d3c66,#141b1baa),url('/assets/images/concrete-cold.webp');background-size:auto,110px 110px;background-blend-mode:multiply;border-color:#444b48}
+.valve-bar .valve-top{background-color:#9da39a}
+.valve-bar .valve-bottom,.valve-bar .valve-back{background-color:#4b514d}
+.exhaust-duct .duct-top{background:#202624;border:9px solid #858a80;box-shadow:inset 4px 4px 5px #090e0c}
+.exhaust-duct .duct-top::before{display:none}
+.pipe-steam i{left:-27px;bottom:12px;width:100px;height:130px;background:radial-gradient(ellipse,#e0e6df99,#c6d2c544 35%,transparent 68%);animation-name:pipe-vapor-dense}
+@keyframes pipe-vapor-dense{0%{transform:translate(0,0) scale(.25);opacity:0}15%{opacity:.65}55%{opacity:.38}100%{transform:translate(35px,-210px) scale(1.6);opacity:0}}
+.exhaust-grate{position:absolute;left:-200px;top:157px;width:156px;height:120px;transform:translateZ(-200px) rotateX(90deg);background:repeating-linear-gradient(90deg,#171e1b 0 8px,#757e72 9px 12px,#343e35 13px 16px);border:7px solid #636d61;box-shadow:inset 0 0 0 3px #222b24;opacity:var(--scene-alpha,1);backface-visibility:visible}
+.grate-steam{transform-style:preserve-3d}
+.grate-steam i{border-radius:0}
+.grate-steam i{left:calc(-48px + var(--plume-x));bottom:0;width:150px;height:180px;background:radial-gradient(ellipse at 38% 60%,#e0e6dfaa,transparent 58%),radial-gradient(ellipse at 65% 40%,#c6d2c577,transparent 64%);animation-name:grate-vapor}
+@keyframes grate-vapor{0%{transform:translate3d(0,0,var(--plume-z)) scale(.38);opacity:0}12%{opacity:.75}55%{opacity:.5}100%{transform:translate3d(var(--drift),-265px,var(--plume-z)) scale(1.8);opacity:0}}
+.project-conveyor{position:absolute;left:-900px;top:490px;width:3000px;height:0;transform:translateZ(420px);transform-style:preserve-3d}
+.conveyor-deck{position:absolute;left:0;top:-100px;width:3000px;height:200px;transform:rotateX(90deg);background:repeating-linear-gradient(90deg,#222725 0 27px,#414842 28px 30px);border:8px solid #626a60;opacity:var(--scene-alpha,1)}
+.conveyor-fascia{position:absolute;left:0;top:0;width:3000px;height:34px;transform:translateZ(100px);background:linear-gradient(#5a6258 0 4px,#252c28 5px 28px,#101713 29px);opacity:var(--scene-alpha,1)}
+.conveyor-load{position:absolute;left:0;top:0;transform-style:preserve-3d;animation:conveyor-travel 60s linear infinite;animation-delay:var(--load-delay);animation-play-state:var(--steam-play,paused)}
+.conveyor-plinth{position:absolute;left:-100px;top:-100px;width:200px;height:200px;transform:translateY(-12px) rotateX(90deg);background:#8a8c80 url('/assets/images/concrete-cold.webp') center/220px;border:7px solid #6d7267;opacity:var(--scene-alpha,1)}
+.conveyor-cube{position:absolute;top:-182px;left:-80px;width:160px;height:160px;transform-style:preserve-3d;transform:rotateY(-15deg)}
+.cargo-face{position:absolute;width:160px;height:160px;background:#343b35;border:4px solid #626b60;backface-visibility:hidden;opacity:var(--scene-alpha,1)}
+.cargo-face img{width:100%;height:100%;object-fit:cover;display:block}
+.cargo-front{transform:translateZ(80px)}.cargo-back{transform:rotateY(180deg) translateZ(80px)}.cargo-left{transform:rotateY(-90deg) translateZ(80px)}.cargo-right{transform:rotateY(90deg) translateZ(80px)}.cargo-top{transform:rotateX(90deg) translateZ(80px)}.cargo-bottom{transform:rotateX(-90deg) translateZ(80px)}
+.cargo-face span{position:absolute;bottom:0;left:0;right:0;padding:6px;background:#121a16e8;color:#e9ece7;font:11px Inter,sans-serif}
+@keyframes conveyor-travel{from{transform:translateX(-300px)}to{transform:translateX(3300px)}}
+@media(prefers-reduced-motion:reduce){.conveyor-load{animation-play-state:paused!important}}
+.conveyor-deck{top:-165px;height:330px}
+.conveyor-fascia{transform:translateZ(165px)}
+.conveyor-plinth{left:-140px;top:-140px;width:280px;height:280px}
+/* 240 × 160 × 240: all four vertical faces match the 3:2 screenshots. */
+.conveyor-cube{top:-173px;left:-120px;width:240px;height:160px;transform:none}
+.cargo-face{width:240px;height:160px;border:0;background:#161b19}
+.cargo-face img{object-fit:cover}
+.cargo-front{transform:translateZ(120px)}
+.cargo-back{transform:rotateY(180deg) translateZ(120px)}
+.cargo-left{transform:rotateY(-90deg) translateZ(120px)}
+.cargo-right{transform:rotateY(90deg) translateZ(120px)}
+.cargo-top,.cargo-bottom{height:240px;top:-40px}
+.cargo-top{transform:rotateX(90deg) translateZ(80px)}
+.cargo-bottom{transform:rotateX(-90deg) translateZ(80px)}
+.project-cover{background:#fff;padding:0}
+.project-cover>.project-topline{display:none}
+.project-cover .project-gallery{position:absolute;left:24px;top:80px;width:790px;margin:0}
+.project-cover .project-slides{height:610px;border-radius:14px;background:#111}
+.project-cover .project-slides img{object-fit:cover}
+.project-cover .project-heading{position:absolute;left:854px;right:40px;top:80px;margin:0}
+.project-cover .project-heading h2{font-size:64px;line-height:1.12;letter-spacing:-.025em}
+.project-cover .project-bottom{position:absolute;left:854px;right:40px;bottom:58px;display:flex;flex-direction:column;align-items:stretch;gap:30px;margin:0}
+.project-cover .project-tags{gap:10px}
+.project-cover .project-tags span{border:1px solid #111;color:#111;font-size:17px;padding:10px 14px}
+.project-cover-actions{display:flex;gap:12px;flex-wrap:wrap}
+.project-cover-actions a,.project-cover-actions button{padding:18px 24px;border:1px solid #111;font:500 20px Inter,sans-serif;background:white;color:#111}
+.project-cover-actions button{background:#111;color:white}
+.project-thumbnails{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px}
+.project-thumbnails button{padding:0;height:140px;border:2px solid transparent;border-radius:10px;overflow:hidden;opacity:.65}
+.project-thumbnails button[aria-pressed=true]{border-color:#111;opacity:1}
+.project-thumbnails img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-announcement{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.hero .design-content .square-actions>a{background:transparent;color:#fff;border:1px solid #fff;padding:16px}
+.industrial-duct:has(.duct-window) .duct-collar{left:-4px;right:-4px;top:65%;bottom:auto;width:auto;height:18px}
+/* Match the near duct material on every non-content surface of the route. */
+.module .shell .wall,.module .rotor .prism-cap{
+ background-color:#92948b;
+ background-image:linear-gradient(#ffffff08,#0002),repeating-linear-gradient(90deg,transparent 0 319px,#34363255 320px,transparent 322px),url('/assets/images/concrete-cold.webp');
+ background-size:auto,auto,420px 420px;
+ background-position:center;
+ background-blend-mode:normal;
+ box-shadow:inset 0 0 0 1px #55574f;
+}
+.module .shell .wall::after,.module .rotor .prism-cap::after{display:none}
+.module .shell .wall-bottom,.module .shell .wall-back{background-color:#555650;background-blend-mode:multiply}
+.scene-inspector{position:fixed;right:12px;bottom:12px;z-index:1000;display:flex;align-items:center;gap:6px;padding:6px;background:#eee;color:#222;border:1px solid #777;font:12px Inter,sans-serif}
+.scene-inspector span{display:none;padding:0 8px}
+.scene-inspecting .scene-inspector span{display:block}
+.scene-inspecting .stage{cursor:grab;user-select:none}
+.scene-inspecting .stage:active{cursor:grabbing}
+.scene-inspecting .panel{pointer-events:none}
+@media(max-width:700px){.scene-inspecting .scene-inspector span{display:none}}

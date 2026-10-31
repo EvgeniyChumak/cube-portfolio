@@ -1,0 +1,16 @@
+---
+import projects from '../data/cases.json';
+const phoneImage:Record<string,number>={gotaris:1,relounge:4,'marketer-ux':3,'victory-zx':4};
+---
+<div class="project-conveyor" aria-hidden="true">
+ <div class="conveyor-deck"></div><div class="conveyor-fascia"></div>
+ {projects.map((p,i)=>{const top=phoneImage[p.id]??4;const faces=[...p.gallery.map((_,j)=>j).filter(j=>j!==top),top];return <div class="conveyor-load" style={`--load-delay:${-i*12}s`}>
+  <div class="conveyor-plinth"></div>
+  <div class="conveyor-cube">
+   {['front','back','left','right','top','bottom'].map((side,j)=><div class={`cargo-face cargo-${side}`}>
+    {side!=='bottom'&&<img src={p.gallery[faces[j]].src} alt="" width="1280" height="853" decoding="async"/>}
+    {side==='front'&&<span>{p.title.split(' — ')[0]}</span>}
+   </div>)}
+  </div>
+ </div>})}
+</div>
