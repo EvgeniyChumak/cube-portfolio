@@ -2,6 +2,7 @@ const camera=document.querySelector<HTMLElement>('.camera')!;
 const world=document.querySelector<HTMLElement>('.world')!;
 const stage=document.querySelector<HTMLElement>('.stage')!;
 const neighborhood=document.querySelector<HTMLElement>('.neighborhood')!;
+const conveyor=neighborhood.querySelector<HTMLElement>('.project-conveyor')!;
 const modules=[...document.querySelectorAll<HTMLElement>('[data-module]')].map(el=>({el,x:Number(el.dataset.x),y:Number(el.dataset.y),n:Number(el.dataset.count),rotor:el.querySelector<HTMLElement>('.rotor')!,panels:[...el.querySelectorAll<HTMLElement>('.panel')]}));
 const stops=modules.flatMap((m,module)=>Array.from({length:module===2?2:m.n},(_,face)=>({module,face,x:m.x+560,y:m.y+320})));
 const aboutTower=modules[1].panels[0].querySelector<HTMLElement>('.about-tower')!;
@@ -162,15 +163,17 @@ const flatHost=document.createElement('div');
 flatHost.setAttribute('role','main');flatHost.setAttribute('aria-label','Portfolio section');
 flatHost.className='flat-section';flatHost.hidden=true;flatViewport.append(flatHost);
 let flatPanel:HTMLElement|null=null,flatMarker:Comment|null=null;
+const rotorFaces=modules.map(()=>0);
 function exitFlat(){
  if(!flatPanel)return;
  flatMarker!.replaceWith(flatPanel);
  flatPanel=null;flatMarker=null;flatHost.replaceChildren();flatHost.hidden=true;
+ stage.classList.remove('hero-at-rest');
  stage.style.display='';
 }
 function enterFlat(index:number){
  if(flatPanel)return;
- const stop=stops[index],panel=modules[stop.module].panels[stop.face];
+ const stop=stops[index],panel=modules[stop.module].panels[Math.round(rotorFaces[stop.module])];
  flatMarker=document.createComment('panel-home');panel.before(flatMarker);
  flatPanel=panel;
  flatHost.style.top='50%';
@@ -181,14 +184,17 @@ function enterFlat(index:number){
   if(i===stop.module)continue;
   const x=m.x-stops[index].x+560,y=m.y-stops[index].y+320;
   if(x>=560+halfW||x+1120<=560-halfW||y>=320+halfH||y+640<=320-halfH)continue;
-  const face=i<stop.module?(i===careerModule?1:m.n-1):0;
+  const face=Math.round(rotorFaces[i]);
   const neighbor=m.panels[face].cloneNode(true) as HTMLElement;
   neighbor.inert=true;neighbor.setAttribute('aria-hidden','true');
   neighbor.classList.add('flat-neighbor');
   Object.assign(neighbor.style,{left:x+'px',top:y+'px',width:'1120px',height:'640px',right:'auto',bottom:'auto'});
   flatHost.append(neighbor);
  }
- flatHost.append(panel);flatHost.hidden=false;stage.style.display='none';
+ flatHost.append(panel);flatHost.hidden=false;
+ stage.classList.toggle('hero-at-rest',index===0);
+ stage.style.display=index===0?'':'none';
+ neighborhood.style.setProperty('--steam-play','paused');
  setTrafficActive(false);
 }
 // One low-frequency visibility check; hidden traffic advances only its clock.
@@ -226,8 +232,58 @@ function setTrafficActive(active:boolean){
 }
 function wake(){if(!raf){last=0;raf=requestAnimationFrame(render)}}
 function resize(){zoom=Math.min(innerWidth/1120,innerHeight/640);wake()}
-function go(value:number){skipFlight=null;isOverview=false;target=clamp(value,-1,stops.length-1);wake()}
-function scrollRoute(delta:number){go(target+delta)}
+const scrollStops=stops.flatMap((stop,index)=>stop.face===0||stop.module===careerModule?[index]:[]);
+const anchorStops=scrollStops.filter(index=>stops[index].face===0);
+let routeStops=scrollStops;
+let explored:{module:number;first:number;last:number;route:number[]}|null=null;
+let coverRoute=true,anchorTravel=false;
+const routeDistances=[0];
+for(let i=1;i<anchorStops.length;i++){
+ const a=stops[anchorStops[i-1]],b=stops[anchorStops[i]];
+ routeDistances.push(routeDistances[i-1]+(Math.hypot(b.x-a.x,b.y-a.y)||640));
+}
+function routeDistance(position:number){if(position<0)return position*640;const i=Math.min(Math.floor(position),routeDistances.length-2);return mix(routeDistances[i],routeDistances[i+1],position-i)}
+function distancePosition(distance:number){if(distance<0)return distance/640;let i=0;while(i<routeDistances.length-2&&distance>=routeDistances[i+1])i++;return i+(distance-routeDistances[i])/(routeDistances[i+1]-routeDistances[i])}
+function routeCoordinate(value:number){
+ if(value<0)return value;
+ let n=0;while(n<routeStops.length-2&&value>=routeStops[n+1])n++;
+ return n+(value-routeStops[n])/(routeStops[n+1]-routeStops[n]);
+}
+function routeValue(value:number){
+ if(value<0)return value;
+ const n=Math.min(Math.floor(value),routeStops.length-2);
+ return mix(routeStops[n],routeStops[n+1],value-n);
+}
+function go(value:number,route=false,anchor=false){
+ if(anchor)explored=null;
+ routeStops=anchor?anchorStops:explored?.route??scrollStops;
+ skipFlight=null;
+ coverRoute=route||!!(explored&&value>=explored.first&&value<=explored.last);
+ anchorTravel=anchor;isOverview=false;
+ target=clamp(value,-1,coverRoute?routeStops.at(-1)!:stops.length-1);wake();
+ if(Math.abs(target-Math.round(target))<1e-7)target=Math.round(target);
+}
+function scrollRoute(delta:number){
+ if(!delta)return;
+ routeStops=explored?.route??scrollStops;
+ // Finish the departure from an explicitly opened face before accepting more
+ // wheel events; changing interpolation modes mid-flight causes a camera jump.
+ if(skipFlight&&coverRoute)return;
+ if(!coverRoute){
+  const from=Math.round(target),stop=stops[from];
+  if(stop.face>0){
+   const destination=clamp(stop.module+Math.sign(delta),0,modules.length-1);
+   if(destination===stop.module)return;
+   const to=stops.findIndex(s=>s.module===destination&&s.face===0);
+   // Preserve the currently displayed orientation throughout translation.
+   go(to,true);skipFlight={from:current,to};return;
+  }
+ }
+ // Scrolling always leaves details and rejoins the cover-only itinerary.
+ const base=coverRoute?target:stops[Math.round(target)].module>=4?routeStops.find(i=>stops[i].module===stops[Math.round(target)].module)!:target;
+ go(routeValue(clamp(routeCoordinate(base)+delta,-1,routeStops.length-1)),true);
+}
+function anchorTo(value:number){go(value,true,true)}
 function skipBlock(direction:number){
  dismissHint();
  const index=Math.max(0,Math.round(target));
@@ -249,7 +305,9 @@ function handleArrow(key:string,direction:number){
  if(module.n>1&&verticalKey!==vertical){
   // Rotation stays inside this case; the travel axis is the explicit exit.
   const first=index-stop.face;
-  go(first+clamp(stop.face+direction,0,module.n-1));
+  const visibleFace=current===target?Math.round(rotorFaces[stop.module]):stop.face;
+  if(current===target)current=first+visibleFace;
+  go(first+clamp(visibleFace+direction,0,module.n-1));
  }else if(verticalKey===vertical||module.n===1){
   skipBlock(direction);
  }
@@ -260,6 +318,7 @@ addEventListener('touchmove',e=>{if((e.target as HTMLElement).closest('nav,.cont
 let lastArrowAt=0;
 addEventListener('keydown',e=>{
  if((e.target as HTMLElement).closest('input,textarea,select,[contenteditable=true]'))return;
+ if((e.target as HTMLElement).closest('[data-gallery]')&&['ArrowLeft','ArrowRight'].includes(e.key))return;
  if(e.key==='Escape'&&inspect){e.preventDefault();setInspect(false);return}
  if(e.key==='Escape'&&!hint.hidden){e.preventDefault();dismissHint();return}
  const direction=['ArrowRight','ArrowDown'].includes(e.key)?1:['ArrowLeft','ArrowUp'].includes(e.key)?-1:0;
@@ -267,16 +326,22 @@ addEventListener('keydown',e=>{
  if(e.key==='Escape'){isOverview=!isOverview;wake();return}
  if((e.target as HTMLElement).closest('button,a'))return;
  const step=['PageDown',' '].includes(e.key)?1:e.key==='PageUp'?-1:0;
- if(step){e.preventDefault();go(Math.round(target)+step)}
- if(e.key==='Home'){e.preventDefault();go(0)}
- if(e.key==='End'){e.preventDefault();go(stops.length-1)}
+ if(step){e.preventDefault();scrollRoute(step)}
+ if(e.key==='Home'){e.preventDefault();anchorTo(0)}
+ if(e.key==='End'){e.preventDefault();anchorTo(routeStops.at(-1)!)}
 },{capture:true});
 function render(time:number){
  // Restore DOM and update the camera in the same animation frame, avoiding
  // a paint of the old 3D transform between the flat and spatial views.
  exitFlat();
  raf=0;const dt=Math.min(50,time-last||16);last=time;const smoothing=reduced.matches?1:1-Math.exp(-dt/125);
- current=mix(current,target,smoothing);if(Math.abs(current-target)<.0001)current=target;
+ if(anchorTravel&&!reduced.matches){
+  // Constant 2400 scene units/sec along the route, including its corners.
+  const position=routeDistance(routeCoordinate(current)),destination=routeDistance(routeCoordinate(target));
+  const step=Math.min(Math.abs(destination-position),dt*2.4);
+  current=step===Math.abs(destination-position)?target:routeValue(distancePosition(position+Math.sign(destination-position)*step));
+ }else current=mix(current,target,smoothing);
+ if(Math.abs(current-target)<.0001)current=target;
  aimCareer(current);
  aimWorks(current);
  aimHero(current);
@@ -286,23 +351,33 @@ function render(time:number){
  if(nextTowerOffset!==towerTarget||reduced.matches)aimTower(nextTowerOffset);
  viewMix=mix(viewMix,isOverview?1:0,smoothing);if(Math.abs(viewMix-(isOverview?1:0))<.0001)viewMix=isOverview?1:0;
  const routePosition=Math.max(0,current);
- const lo=Math.floor(routePosition),hi=Math.min(lo+1,stops.length-1);
+ const routeIndex=Math.min(Math.floor(Math.max(0,routeCoordinate(routePosition))),routeStops.length-2);
+ const lo=coverRoute?routeStops[routeIndex]:Math.floor(routePosition),hi=coverRoute?routeStops[routeIndex+1]:Math.min(lo+1,stops.length-1);
  const a=skipFlight?stops[Math.round(skipFlight.from)]:stops[lo];
  const b=skipFlight?stops[skipFlight.to]:stops[hi];
- const t=skipFlight?ease(clamp((current-skipFlight.from)/(skipFlight.to-skipFlight.from),0,1)):ease(routePosition-lo);
+ const fraction=clamp((routePosition-lo)/(hi-lo||1),0,1);
+ const t=skipFlight?ease(clamp((current-skipFlight.from)/(skipFlight.to-skipFlight.from),0,1)):anchorTravel?fraction:ease(fraction);
  const rotating=a.module===b.module&&a.face!==b.face;
  const turning=a.module!==b.module&&a.x===b.x;
  // Camera coordinates stay fixed throughout every case; only its rotor changes.
  const cx=mix(a.x,b.x,t),cy=mix(a.y,b.y,t);
  const entrance=ease(clamp(current+1,0,1));
- // Fade leaf surfaces: opacity on the 3D parent would flatten the entire street.
- const sceneAlpha=inspect&&routePosition<1?1:1-ease(clamp((entrance-.45)/.55,0,1));
- neighborhood.style.setProperty('--scene-alpha',sceneAlpha.toFixed(4));
- neighborhood.style.visibility=sceneAlpha>.0001?'visible':'hidden';
- neighborhood.style.display=sceneAlpha>.0001?'':'none';
- neighborhood.style.setProperty('--steam-play',sceneAlpha>.01&&!document.hidden&&!reduced.matches?'running':'paused');
- neighborhood.style.setProperty('--car-play',sceneAlpha>.0001&&!document.hidden&&!reduced.matches?'running':'paused');
- setTrafficActive(sceneAlpha>.0001&&!document.hidden&&!reduced.matches);
+ // Let the camera pass the pipework before culling it. Allow for the
+ // narrower projection of the farthest duct at z = -1450.
+ const retreat=inspect?0:ease(clamp((routePosition-.18)/.82,0,1));
+ const streetVisible=retreat<1;
+ if(streetVisible&&!neighborhood.parentNode)world.prepend(neighborhood);
+ if(!streetVisible&&neighborhood.parentNode)neighborhood.remove();
+ const halfView=innerWidth/(2*zoom);
+ neighborhood.style.transform=retreat>0&&streetVisible
+  ?`translateX(${-retreat*(2200+halfView*(1+1450*zoom/2000))}px)`:'';
+ // At full entry the highest cargo edge starts near the camera centre.
+ // One half-viewport plus clearance takes it below the frame.
+ const drop=inspect?0:entrance;
+ if(drop<1&&!conveyor.parentNode)neighborhood.prepend(conveyor);
+ if(drop===1&&conveyor.parentNode)conveyor.remove();
+ if(drop<1)conveyor.style.transform=`translate3d(0,${drop*(innerHeight/(2*zoom)+100)}px,420px)`;
+ updateStreetMotion();
  const overviewZoom=Math.min(innerWidth/5300,(innerHeight-100)/4800);
  const scale=mix(mix(zoom*.64,zoom,entrance),overviewZoom,viewMix);
  const entryOffset=56*(1-entrance);
@@ -310,56 +385,90 @@ function render(time:number){
  camera.style.top='50%';
  camera.style.transform=`scale3d(${scale},${scale},${scale}) rotateX(${mix((1-entrance)*-24,-24,viewMix)+inspectX}deg) rotateY(${mix((1-entrance)*-20,-18,viewMix)+inspectY}deg)`;
  world.style.transform=`translate3d(${-centerX}px,${-centerY}px,0)`;
+ // During entry both camera angles lie between -24° and 0°. Bound the
+ // leftmost projected edge using the farthest possible depth, including
+ // the 1120-unit case prism. Keep a margin for seams and rounding.
+ const entryCulling=current<=0&&!inspect&&!isOverview&&viewMix===0;
  modules.forEach((m,index)=>{
-  let face=skipFlight?0:index<a.module?(index===careerModule?1:m.n-1):0;
-  if(index===a.module)face=a.face;
-  if(rotating&&index===a.module)face=mix(a.face,b.face,t);
-  if(m.n>1){const radius=(index===careerModule?320:560)/Math.tan(Math.PI/m.n);m.rotor.style.transform=`translateZ(${-radius}px) rotate${index===careerModule?'X':'Y'}(${-face*360/m.n}deg)`}
+  if(entryCulling&&m.x>centerX){
+   const minDepth=-1120-.41*Math.max(0,m.y+640-centerY);
+   const leftBound=.93*(m.x-centerX)*scale/(1-minDepth*scale/2000);
+   if(leftBound>innerWidth/2+64){m.el.style.display='none';return}
+  }
+  if(m.el.style.display==='none')m.el.style.display='';
+  let face=rotorFaces[index];
+  if(!skipFlight&&!anchorTravel){
+   if(rotating&&index===a.module)face=mix(a.face,b.face,t);
+   else if(index===a.module&&(explored?.module===index||index===careerModule||!coverRoute&&a.face>0))face=a.face;
+   else if(index===b.module&&index===careerModule&&hi!==lo)face=b.face;
+  }
+  if(m.n>1&&(face!==rotorFaces[index]||!m.rotor.style.transform)){
+   const radius=(index===careerModule?320:560)/Math.tan(Math.PI/m.n);
+   m.rotor.style.transform=`translateZ(${-radius}px) rotate${index===careerModule?'X':'Y'}(${-face*360/m.n}deg)`;
+   rotorFaces[index]=face;
+  }
   m.el.style.visibility=entrance<.99||viewMix>.01||Math.abs(m.x-cx)<2500&&Math.abs(m.y-cy)<1450?'visible':'hidden';
  });
- const active=isOverview||current<-.1||skipFlight&&current!==target?-1:Math.round(routePosition);
+ const routeActive=isOverview||current<-.1||skipFlight&&current!==target?-1:coverRoute?(fraction<.5?lo:hi):Math.round(routePosition);
+ const active=routeActive<0?-1:routeActive-stops[routeActive].face+Math.round(rotorFaces[stops[routeActive].module]);
  if(selected!==active){selected=active;modules.forEach((m,i)=>m.panels.forEach((p,f)=>{const enabled=active>=0&&stops[active].module===i&&stops[active].face===f;p.inert=!enabled;p.setAttribute('aria-hidden',String(!enabled))}));}
  if(current===target)skipFlight=null;
- if(current===target&&target>=0&&Number.isInteger(target)&&viewMix===0&&!isOverview&&!inspect)enterFlat(target);
+ // Collapse the extra stops only after the camera has left the case.
+ if(explored&&((current>=explored.last+1&&target>=explored.last+1)||(current<=explored.first-1&&target<=explored.first-1))){
+  explored=null;routeStops=scrollStops;
+ }
+ if(current===target&&target>=0&&Number.isInteger(target)&&(!coverRoute||routeStops.includes(target))&&viewMix===0&&!isOverview&&!inspect)enterFlat(target);
  if(current!==target||viewMix!==(isOverview?1:0))raf=requestAnimationFrame(render);
 }
 addEventListener('resize',resize);resize();
 
 
-document.querySelectorAll<HTMLButtonElement>('[data-go]').forEach(b=>b.onclick=()=>go(Number(b.dataset.go)));
+document.querySelectorAll<HTMLButtonElement>('[data-go]').forEach(b=>b.onclick=()=>anchorTo(stops.findIndex(s=>s.module===Number(b.dataset.go)&&s.face===0)));
 
 
 
 
 
 
-addEventListener('visibilitychange',()=>{
- neighborhood.style.setProperty('--steam-play',!document.hidden&&!flatPanel&&neighborhood.style.display!=='none'&&!reduced.matches?'running':'paused');
- setTrafficActive(!document.hidden&&!flatPanel&&neighborhood.style.visibility!=='hidden'&&!reduced.matches);
-});
+function updateStreetMotion(){
+ const active=current<0&&neighborhood.isConnected&&!document.hidden&&!reduced.matches;
+ neighborhood.style.setProperty('--steam-play',active?'running':'paused');
+ setTrafficActive(active);
+}
+addEventListener('visibilitychange',updateStreetMotion);
 reduced.addEventListener('change',wake);
 
 document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(gallery=>{
  const images=[...gallery.querySelectorAll<HTMLImageElement>('.project-slides img')];
  const counter=gallery.querySelector<HTMLElement>('[data-gallery-counter]')!;
+ const track=gallery.querySelector<HTMLElement>('.project-slide-track')!;
  let index=0;
  const select=(next:number)=>{
-  images[index].hidden=true;index=next;
-  const image=images[index];if(!image.getAttribute('src'))image.src=image.dataset.src!;
-  image.hidden=false;counter.textContent=String(index+1).padStart(2,'0')+' / '+String(images.length).padStart(2,'0');
+  index=(next+images.length)%images.length;
+  track.style.transform=`translateX(${-index*100}%)`;
+  images.forEach((img,i)=>img.setAttribute('aria-hidden',String(i!==index)));
+  counter.textContent=String(index+1).padStart(2,'0')+' / '+String(images.length).padStart(2,'0');
   gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-index]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.galleryIndex)===index)));
  };
  gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-index]').forEach(b=>b.onclick=()=>select(Number(b.dataset.galleryIndex)));
  gallery.querySelectorAll<HTMLButtonElement>('[data-slide]').forEach(button=>button.addEventListener('click',()=>{
-  images[index].hidden=true;
-  index=(index+Number(button.dataset.slide)+images.length)%images.length;
-  const image=images[index];
-  if(!image.getAttribute('src'))image.src=image.dataset.src!;
-  image.hidden=false;
-  counter.textContent=String(index+1).padStart(2,'0')+' / '+String(images.length).padStart(2,'0');
+  select(index+Number(button.dataset.slide));
  }));
+ gallery.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();e.stopPropagation();select(index+(e.key==='ArrowRight'?1:-1))}});
+ const viewport=gallery.querySelector<HTMLElement>('.project-slides')!;
+ let startX=0,startY=0;
+ viewport.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;startY=e.touches[0].clientY;e.stopPropagation()},{passive:true});
+ viewport.addEventListener('touchmove',e=>{e.stopPropagation()},{passive:true});
+ viewport.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))select(index+(dx<0?1:-1));e.stopPropagation()},{passive:true});
 });
 document.querySelectorAll<HTMLButtonElement>('[data-case-turn]').forEach(button=>{
  const moduleIndex=modules.findIndex(m=>m.el.contains(button));
- button.onclick=()=>{dismissHint();go(stops.findIndex(s=>s.module===moduleIndex&&s.face===1))};
+ button.onclick=()=>{
+  dismissHint();
+  const first=stops.findIndex(s=>s.module===moduleIndex);
+  const last=first+modules[moduleIndex].n-1;
+  const route=scrollStops.flatMap(i=>i===first?Array.from({length:last-first+1},(_,face)=>first+face):[i]);
+  explored={module:moduleIndex,first,last,route};
+  go(first+1,true);
+ };
 });

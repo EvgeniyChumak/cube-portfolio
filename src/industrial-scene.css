@@ -105,6 +105,29 @@ body{background:#161e22}
 .project-thumbnails img{width:100%;height:100%;object-fit:cover;display:block}
 .gallery-announcement{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
 .hero .design-content .square-actions>a{background:transparent;color:#fff;border:1px solid #fff;padding:16px}
+.project-slides{position:relative;touch-action:pan-y}
+.project-slide-track{height:100%;display:flex;transition:transform 380ms cubic-bezier(.22,.61,.36,1)}
+.project-cover .project-slide-track img{flex:0 0 100%;min-width:0;width:100%;height:100%;user-select:none}
+.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;padding:14px;background:#fff;color:#111;border:1px solid #111;border-radius:16px;display:grid;place-items:center}
+.gallery-prev{left:16px}.gallery-next{right:16px}
+.gallery-arrow svg{width:28px;height:28px}
+.project-cover-actions a,.project-cover-actions button{display:flex;align-items:center;gap:16px}
+.project-cover-actions svg{width:24px;height:24px;flex:none}
+@media(prefers-reduced-motion:reduce){.project-slide-track{transition:none}}
+.project-cover .project-tags span{border:1px solid #111;border-radius:3px;background:#fff;color:#111;font-size:14px;font-weight:400;line-height:1.4;text-transform:uppercase;letter-spacing:.03em;padding:5px 10px}
+.project-cover-gray{background:#2c2c2c;color:#fff}
+.project-cover-gray .project-tags span{background:transparent;border-color:#fff;color:#fff}
+.project-cover-gray .project-cover-actions a{background:transparent;border-color:#fff;color:#fff}
+.project-cover-gray .project-cover-actions button{background:#fff;border-color:#fff;color:#111}
+.project-cover-gray .project-thumbnails button[aria-pressed=true]{border-color:#fff}
+.project-cover-gray .gallery-arrow{background:#2c2c2c;color:#fff;border-color:#fff}
+.project-cover-gray .gallery-arrow:hover{background:#fff;color:#111}
+.project-case-light{background:#fff;color:#111}
+.project-case-gray{background:#2c2c2c;color:#fff}
+.project-case-light .project-topline,.project-case-light .project-detail-footer{border-color:#1113;color:#555}
+.project-case-light .project-kicker,.project-case-light .project-metrics span{color:#555}
+.project-case-light .project-overview>div:first-child,.project-case-light .project-topics>article:first-child{border-color:#1113}
+.project-case-light.project-detail .project-tags span{border-color:#1114;color:#111}
 .industrial-duct:has(.duct-window) .duct-collar{left:-4px;right:-4px;top:65%;bottom:auto;width:auto;height:18px}
 /* Match the near duct material on every non-content surface of the route. */
 .module .shell .wall,.module .rotor .prism-cap{
@@ -124,3 +147,8 @@ body{background:#161e22}
 .scene-inspecting .stage:active{cursor:grabbing}
 .scene-inspecting .panel{pointer-events:none}
 @media(max-width:700px){.scene-inspecting .scene-inspector span{display:none}}
+
+.hero-at-rest .module{display:none}
+.conveyor-deck{overflow:hidden;background:#222725}
+.conveyor-deck::before{content:'';position:absolute;inset:0 0 0 -30px;background:repeating-linear-gradient(90deg,#222725 0 27px,#414842 28px 30px);animation:belt-advance .5s linear infinite;animation-play-state:var(--steam-play,paused)}
+@keyframes belt-advance{to{transform:translateX(30px)}}
